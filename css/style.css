@@ -345,17 +345,25 @@ button:focus-visible,
   gap: var(--space-5);
   align-items: center;
 }
-/* טיפוגרפיית ההירו — כותרת בסריף העדין, פתיח ופסקה בפונט הגוף */
-.hero-text .eyebrow {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 1.3rem;
+/* טיפוגרפיית ההירו — השם/תפקיד והטאגליין ממורכזים בפונט אחיד ומיוחד */
+.hero-text {
+  text-align: center;
 }
+.hero-text .eyebrow,
 .hero-text h1 {
   font-family: var(--font-heading);
+}
+.hero-text .eyebrow {
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+.hero-text h1 {
   font-weight: 400;
-  font-size: clamp(2.2rem, 4vw, 3.1rem);
+  font-size: clamp(2.4rem, 4.2vw, 3.3rem);
   line-height: 1.25;
+}
+.hero-text .hero-actions {
+  justify-content: center;
 }
 .hero-text .lead {
   font-family: var(--font-body);
@@ -395,12 +403,35 @@ button:focus-visible,
   .hero-photo { display: block !important; }
 }
 
+/* מבנה ההירו בעמודי השירות — תמונה למעלה, מתחתיה הכפתור הממורכז,
+   ורק אז הכותרת והטקסט (לפי בקשת עמית: תמונה ← כפתור ← כותרת) */
 .page-hero {
   padding-block: var(--space-5);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-5);
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: var(--space-3);
+}
+.page-hero-text {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
+  gap: var(--space-2);
+  max-width: 640px;
+}
+.page-hero-text .hero-actions {
+  order: -1;
+  margin: 0;
+}
+.page-hero-media {
+  order: -2;
+  width: 100%;
+  max-width: 420px;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  aspect-ratio: 4/3;
 }
 .page-hero-text .lead {
   font-size: 1.1rem;
@@ -410,12 +441,6 @@ button:focus-visible,
 .page-hero-text .format-note {
   font-size: 0.9rem;
   color: var(--color-text-soft);
-}
-.page-hero-media {
-  border-radius: var(--radius-card);
-  overflow: hidden;
-  box-shadow: var(--shadow-soft);
-  aspect-ratio: 4/3;
 }
 .page-hero-media img {
   width: 100%;
@@ -940,7 +965,6 @@ button:focus-visible,
    ========================================================================== */
 
 @media (max-width: 900px) {
-  .page-hero,
   .about-grid,
   .cta-banner--split {
     grid-template-columns: 1fr;
@@ -951,7 +975,6 @@ button:focus-visible,
   .cta-banner--split .cta-actions {
     justify-content: center;
   }
-  .page-hero-media,
   .cta-media { order: -1; }
 
   /* הירו הבית במובייל — הטקסט בתוך התמונה, על רצועת הווילון הבהירה
@@ -1020,7 +1043,7 @@ button:focus-visible,
   .hero-text .heart-doodle {
     display: none;
   }
-  .hero-actions {
+  .hero-text .hero-actions {
     position: absolute;
     bottom: var(--space-3);
     inset-inline: var(--space-2);
