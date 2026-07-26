@@ -1031,7 +1031,7 @@ button:focus-visible,
   .hero-text .eyebrow {
     max-width: none;
     font-size: 1.6rem;
-    margin-top: var(--space-2);
+    margin-top: -10px;
   }
   .hero-text .heart-doodle {
     display: none;
