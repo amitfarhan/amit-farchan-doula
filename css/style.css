@@ -349,7 +349,7 @@ button:focus-visible,
 .hero-text .eyebrow {
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
 }
 .hero-text h1 {
   font-family: var(--font-heading);
@@ -401,6 +401,15 @@ button:focus-visible,
   grid-template-columns: 1fr 1fr;
   gap: var(--space-5);
   align-items: center;
+}
+.page-hero-text .lead {
+  font-size: 1.1rem;
+  color: var(--color-text-soft);
+  max-width: 46ch;
+}
+.page-hero-text .format-note {
+  font-size: 0.9rem;
+  color: var(--color-text-soft);
 }
 .page-hero-media {
   border-radius: var(--radius-card);

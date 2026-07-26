@@ -53,6 +53,7 @@ collections:
             widget: object
             fields:
               - { name: eyebrow, label: השורה שמופיעה מעל הסרטון, widget: string }
+              - { name: title, label: "השם והתפקיד (כל שורה בנפרד)", widget: text }
               - { name: ctaText, label: טקסט הכפתור, widget: string }
               - { name: image, label: תמונת הפתיח, widget: image }
               - { name: imageMobile, label: תמונת הפתיח למובייל, widget: image }
@@ -148,6 +149,8 @@ collections:
               - { name: ogImageWidth, label: רוחב תמונת שיתוף, widget: number }
               - { name: ogImageHeight, label: גובה תמונת שיתוף, widget: number }
           - { name: title, label: כותרת העמוד, widget: string }
+          - { name: lead, label: משפט הסבר מתחת לכותרת (לא חובה), widget: text, required: false }
+          - { name: formatNote, label: "הערה קטנה על פורמט המפגש (לא חובה)", widget: string, required: false }
           - { name: ctaButtonText, label: טקסט כפתור הפתיח, widget: string }
           - { name: image, label: תמונת העמוד, widget: image }
           - { name: imageAlt, label: תיאור התמונה, widget: string }

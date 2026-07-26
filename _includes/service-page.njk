@@ -9,6 +9,12 @@
       <div class="page-hero">
         <div class="page-hero-text">
           <h1>{{ d.title }}</h1>
+          {%- if d.lead %}
+          <p class="lead">{{ d.lead }}</p>
+          {%- endif %}
+          {%- if d.formatNote %}
+          <p class="format-note">{{ d.formatNote }}</p>
+          {%- endif %}
           <div class="hero-actions">
             {{ m.whatsappButton(site, d.ctaButtonText) }}
           </div>
