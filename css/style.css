@@ -279,7 +279,7 @@ button:focus-visible,
 }
 /* הלוגו המלא של עמית (סימן + כיתוב) בהדר */
 .brand-logo {
-  height: 58px;
+  height: 74px;
   width: auto;
   display: block;
 }
@@ -355,7 +355,9 @@ button:focus-visible,
 }
 .hero-text .eyebrow {
   font-weight: 600;
-  font-size: 1.4rem;
+  font-size: 1.55rem;
+  color: var(--color-olive-tint);
+  margin-top: var(--space-1);
 }
 .hero-text h1 {
   font-weight: 400;
@@ -1010,7 +1012,7 @@ button:focus-visible,
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(250, 246, 238, 0.92) 0%, rgba(250, 246, 238, 0.65) 38%, rgba(250, 246, 238, 0) 62%);
+    background: linear-gradient(to bottom, rgba(250, 246, 238, 0.92) 0%, rgba(250, 246, 238, 0.72) 46%, rgba(250, 246, 238, 0) 72%);
     pointer-events: none;
   }
   .hero-text {
@@ -1021,24 +1023,15 @@ button:focus-visible,
     flex-direction: column;
     padding: var(--space-3) 0;
   }
-  /* הכותרת הראשית — ממורכזת למעלה, מעל עמית, על כל רוחב התמונה */
+  /* השם/תפקיד והטאגליין — ממורכזים על כל רוחב התמונה, מעל עמית */
+  .hero-text h1 {
+    max-width: none;
+    font-size: 1.9rem;
+  }
   .hero-text .eyebrow {
     max-width: none;
-    text-align: center;
-    font-size: 1.3rem;
-    margin-bottom: var(--space-3);
-  }
-  /* הכותרת והפסקה — לצד עמית, על הקיר הפנוי בצד ימין */
-  .hero-text h1,
-  .hero-text .lead {
-    max-width: 58%;
-    color: var(--color-text);
-  }
-  .hero-text h1 {
-    font-size: 1.7rem;
-  }
-  .hero-text .lead {
-    font-size: 1.02rem;
+    font-size: 1.15rem;
+    margin-top: var(--space-2);
   }
   .hero-text .heart-doodle {
     display: none;

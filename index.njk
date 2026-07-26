@@ -14,8 +14,8 @@
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-text">
-        <p class="eyebrow">{{ home.hero.eyebrow }}</p>
         <h1>{{ home.hero.title | nl2br | safe }}</h1>
+        <p class="eyebrow">{{ home.hero.eyebrow }}</p>
         <div class="hero-actions">
           {{ m.whatsappButton(site, home.hero.ctaText) }}
         </div>
