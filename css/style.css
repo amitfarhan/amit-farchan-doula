@@ -355,9 +355,9 @@ button:focus-visible,
 }
 .hero-text .eyebrow {
   font-weight: 600;
-  font-size: 1.55rem;
-  color: var(--color-olive-tint);
-  margin-top: var(--space-1);
+  font-size: 1.8rem;
+  color: var(--color-olive-deep);
+  margin-top: -4px;
 }
 .hero-text h1 {
   font-weight: 400;
