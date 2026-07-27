@@ -10,6 +10,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("print");
 
+  // חותמת זמן לכל בנייה — מצורפת כפרמטר גרסה לקישורי CSS/JS כדי שדפדפנים
+  // יביאו תמיד את הגרסה העדכנית ולא יישארו עם קובץ ישן מהקאש אחרי פרסום
+  eleventyConfig.addGlobalData("buildTime", () => Date.now());
+
   // עריכת תוכן מפעילה בנייה מחדש בזמן פיתוח
   eleventyConfig.addWatchTarget("content/");
 
