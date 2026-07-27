@@ -38,7 +38,10 @@ function initScrollReveal() {
   window.addEventListener('hashchange', revealAll);
 }
 
-// קיר ההמלצות: התמונות זזות לבד ברצף אינסופי, ואפשר גם לגרור אותן בעכבר/מגע
+// קיר ההמלצות: התמונות זזות לבד ברצף אינסופי, ואפשר גם לגרור/לגלול אותן ידנית.
+// מבוסס על גלילה אמיתית (scrollLeft) ולא על transform מדומה — כך שגם אם
+// האנימציה האוטומטית לא רצה מסיבה כלשהי, אפשר תמיד לגלול/להחליק ולראות
+// את כל התמונות (גיבוי טבעי של הדפדפן, לא תלוי ב-JS).
 function initReviewsCarousel() {
   const wall = document.querySelector('.reviews-wall');
   const track = wall ? wall.querySelector('.reviews-track') : null;
@@ -50,16 +53,8 @@ function initReviewsCarousel() {
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  let offset = 0;
-  let isDragging = false;
-  let dragStartX = 0;
-  let dragStartOffset = 0;
-  let isPaused = false;
-  let resumeTimer;
-
   // המרחק האמיתי בין תחילת הסט הראשון לתחילת הסט המשוכפל — נמדד ישירות
-  // מהעמודים בפועל (ולא מחושב מרוחב+רווחים), כדי שהלופ יהיה חלק לגמרי
-  // בלי "קפיצה" קטנה כשהוא חוזר להתחלה.
+  // מהעמודים בפועל (ולא מחושב מרוחב+רווחים), כדי שהלופ יהיה מדויק.
   let repeatWidth = 1;
   const remeasure = () => {
     const r0 = items[0].getBoundingClientRect();
@@ -68,35 +63,53 @@ function initReviewsCarousel() {
   };
   remeasure();
   window.addEventListener('resize', remeasure);
-  // התמונות טעונות eager, אבל מוודאים שהמדידה נכונה גם אם התמונות
-  // מסיימות להיטען אחרי שהקרוסלה כבר אותחלה
   track.querySelectorAll('img').forEach((img) => {
     if (!img.complete) img.addEventListener('load', remeasure);
   });
 
-  const applyOffset = () => {
-    let x = offset % repeatWidth;
-    if (x > 0) x -= repeatWidth;
-    track.style.transform = `translateX(${x}px)`;
+  // בעמוד RTL דפדפנים תקניים מציגים scrollLeft=0 בקצה ההתחלתי (ימין) והולך
+  // ושלילי ככל שגוללים פנימה לתוכן. בודקים בפועל כדי לא להניח כיוון בטעות.
+  const startScrollLeft = wall.scrollLeft;
+  wall.scrollLeft = startScrollLeft - 1;
+  const rtlSign = wall.scrollLeft < startScrollLeft ? -1 : 1;
+  wall.scrollLeft = startScrollLeft;
+
+  const wrap = () => {
+    if (rtlSign < 0 && wall.scrollLeft <= -repeatWidth) {
+      wall.scrollLeft += repeatWidth;
+    } else if (rtlSign > 0 && wall.scrollLeft >= repeatWidth) {
+      wall.scrollLeft -= repeatWidth;
+    }
   };
 
+  let isPaused = false;
+  let isDragging = false;
+  let resumeTimer;
   const schedulePause = () => {
     isPaused = true;
     clearTimeout(resumeTimer);
     resumeTimer = setTimeout(() => { isPaused = false; }, 2000);
   };
 
+  // עצירה זמנית בכל אינטראקציה ידנית (מגע/עכבר/טאץ'-פד אופקי) —
+  // גלילה אנכית רגילה של העמוד לא אמורה לעצור את התזוזה.
+  wall.addEventListener('touchstart', schedulePause, { passive: true });
+  wall.addEventListener('wheel', (event) => {
+    if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) schedulePause();
+  }, { passive: true });
+
+  let dragStartX = 0;
+  let dragStartScroll = 0;
   const dragStart = (event) => {
     isDragging = true;
     wall.classList.add('is-dragging');
-    dragStartX = 'touches' in event ? event.touches[0].clientX : event.clientX;
-    dragStartOffset = offset;
+    dragStartX = event.clientX;
+    dragStartScroll = wall.scrollLeft;
   };
   const dragMove = (event) => {
     if (!isDragging) return;
-    const x = 'touches' in event ? event.touches[0].clientX : event.clientX;
-    offset = dragStartOffset + (x - dragStartX);
-    applyOffset();
+    wall.scrollLeft = dragStartScroll + (event.clientX - dragStartX);
+    wrap();
   };
   const dragEnd = () => {
     if (!isDragging) return;
@@ -104,19 +117,15 @@ function initReviewsCarousel() {
     wall.classList.remove('is-dragging');
     schedulePause();
   };
-
   wall.addEventListener('mousedown', dragStart);
   window.addEventListener('mousemove', dragMove);
   window.addEventListener('mouseup', dragEnd);
-  wall.addEventListener('touchstart', dragStart, { passive: true });
-  window.addEventListener('touchmove', dragMove, { passive: true });
-  window.addEventListener('touchend', dragEnd);
 
   const speed = 0.5;
   function tick() {
     if (!isDragging && !isPaused && !reduceMotion) {
-      offset -= speed;
-      applyOffset();
+      wall.scrollLeft += rtlSign * speed;
+      wrap();
     }
     requestAnimationFrame(tick);
   }
