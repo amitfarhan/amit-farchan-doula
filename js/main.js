@@ -3,6 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initNavToggle();
   initScrollReveal();
+  initReviewsCarousel();
 });
 
 function initScrollReveal() {
@@ -35,6 +36,76 @@ function initScrollReveal() {
     link.addEventListener('click', revealAll);
   });
   window.addEventListener('hashchange', revealAll);
+}
+
+// קיר ההמלצות: התמונות זזות לבד ברצף אינסופי, ואפשר גם לגרור אותן בעכבר/מגע
+function initReviewsCarousel() {
+  const wall = document.querySelector('.reviews-wall');
+  const track = wall ? wall.querySelector('.reviews-track') : null;
+  if (!wall || !track) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let offset = 0;
+  let halfWidth = track.scrollWidth / 2;
+  let isDragging = false;
+  let dragStartX = 0;
+  let dragStartOffset = 0;
+  let isPaused = false;
+  let resumeTimer;
+
+  window.addEventListener('resize', () => {
+    halfWidth = track.scrollWidth / 2;
+  });
+
+  const applyOffset = () => {
+    let x = offset % halfWidth;
+    if (x > 0) x -= halfWidth;
+    track.style.transform = `translateX(${x}px)`;
+  };
+
+  const schedulePause = () => {
+    isPaused = true;
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => { isPaused = false; }, 2000);
+  };
+
+  const dragStart = (event) => {
+    isDragging = true;
+    wall.classList.add('is-dragging');
+    dragStartX = 'touches' in event ? event.touches[0].clientX : event.clientX;
+    dragStartOffset = offset;
+  };
+  const dragMove = (event) => {
+    if (!isDragging) return;
+    const x = 'touches' in event ? event.touches[0].clientX : event.clientX;
+    offset = dragStartOffset + (x - dragStartX);
+    applyOffset();
+  };
+  const dragEnd = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    wall.classList.remove('is-dragging');
+    schedulePause();
+  };
+
+  wall.addEventListener('mousedown', dragStart);
+  window.addEventListener('mousemove', dragMove);
+  window.addEventListener('mouseup', dragEnd);
+  wall.addEventListener('touchstart', dragStart, { passive: true });
+  window.addEventListener('touchmove', dragMove, { passive: true });
+  window.addEventListener('touchend', dragEnd);
+  wall.addEventListener('wheel', schedulePause, { passive: true });
+
+  const speed = 0.5;
+  function tick() {
+    if (!isDragging && !isPaused && !reduceMotion) {
+      offset -= speed;
+      applyOffset();
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
 }
 
 function initNavToggle() {

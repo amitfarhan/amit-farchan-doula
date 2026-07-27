@@ -117,13 +117,14 @@
       <p class="reviews-stats reveal">{{ home.testimonials.stats }}</p>
 
       <div class="reviews-wall reveal">
-        {%- for t in home.testimonials.items %}
-        <blockquote class="testimonial-card">
-          <span class="testimonial-quote-mark" aria-hidden="true">”</span>
-          <p class="testimonial-text">{{ t.text }}</p>
-          <cite class="testimonial-author">— {{ t.author }}</cite>
-        </blockquote>
-        {%- endfor %}
+        <div class="reviews-track">
+          {%- for t in home.testimonials.items %}
+          <img class="testimonial-photo" src="{{ t.image }}" alt="{{ t.imageAlt }}" width="{{ t.imageWidth }}" height="{{ t.imageHeight }}" loading="lazy">
+          {%- endfor %}
+          {%- for t in home.testimonials.items %}
+          <img class="testimonial-photo" src="{{ t.image }}" alt="" aria-hidden="true" width="{{ t.imageWidth }}" height="{{ t.imageHeight }}" loading="lazy">
+          {%- endfor %}
+        </div>
       </div>
     </div>
   </section>

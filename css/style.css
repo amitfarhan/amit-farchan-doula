@@ -829,55 +829,28 @@ button:focus-visible,
   margin: calc(-1 * var(--space-4)) auto var(--space-4);
 }
 .reviews-wall {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  max-width: 100%;
+}
+.reviews-wall.is-dragging {
+  cursor: grabbing;
+}
+.reviews-track {
+  display: flex;
   gap: var(--space-3);
-  max-width: 920px;
-  margin-inline: auto;
+  width: max-content;
+  will-change: transform;
 }
-.testimonial-card {
-  margin: 0 0 14px;
-  background: var(--color-cream-tint);
+.testimonial-photo {
+  height: 420px;
+  width: auto;
+  max-width: none;
   border-radius: var(--radius-card);
-  padding: var(--space-4);
-  text-align: center;
   box-shadow: var(--shadow-card);
-  position: relative;
-}
-.testimonial-card::after {
-  content: "";
-  position: absolute;
-  bottom: -14px;
-  right: 48px;
-  width: 28px;
-  height: 28px;
-  background: inherit;
-  border-radius: 0 0 4px 0;
-  transform: rotate(45deg);
-  box-shadow: 4px 4px 6px -4px rgba(59, 50, 43, 0.12);
-}
-.reviews-wall > .testimonial-card:nth-child(3n+2) {
-  background: var(--color-olive-tint);
-}
-.reviews-wall > .testimonial-card:nth-child(3n+3) {
-  background: var(--color-taupe-tint);
-}
-.testimonial-quote-mark {
-  font-family: var(--font-heading);
-  font-size: 2.5rem;
-  color: var(--color-taupe);
-  line-height: 1;
-  display: block;
-  margin-bottom: var(--space-1);
-}
-.testimonial-text {
-  font-size: 1.05rem;
-  margin-bottom: var(--space-2);
-}
-.testimonial-author {
-  color: var(--color-text);
-  font-weight: 600;
-  font-style: normal;
+  flex: 0 0 auto;
+  -webkit-user-drag: none;
 }
 /* ==========================================================================
    באנר CTA — תמונה + טקסט, כמו סקשן הסיום במוקאפ הייחוס
@@ -1052,8 +1025,8 @@ button:focus-visible,
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-2);
   }
-  .reviews-wall {
-    grid-template-columns: 1fr;
+  .testimonial-photo {
+    height: 280px;
   }
   .service-card h3 {
     font-size: 0.95rem;
