@@ -4,7 +4,31 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavToggle();
   initScrollReveal();
   initReviewsCarousel();
+  initHeroVideo();
 });
+
+// וידאו ההירו: מנסה גם הפעלה יזומה מ-JS (חלק ממכשירים חוסמים autoplay
+// דקלרטיבי בגלל חיסכון בסוללה/נתונים) ומאפשרת ללחוץ על הווידאו כדי
+// להפעיל אותו ידנית אם ה-autoplay נחסם.
+function initHeroVideo() {
+  const video = document.querySelector('.hero-video');
+  if (!video) return;
+
+  const tryPlay = () => {
+    const promise = video.play();
+    if (promise && promise.catch) promise.catch(() => {});
+  };
+
+  if (video.readyState >= 2) {
+    tryPlay();
+  } else {
+    video.addEventListener('loadeddata', tryPlay, { once: true });
+  }
+
+  video.addEventListener('click', () => {
+    if (video.paused) tryPlay();
+  });
+}
 
 function initScrollReveal() {
   const items = document.querySelectorAll('.reveal');
