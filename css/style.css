@@ -602,7 +602,7 @@ button:focus-visible,
   text-align: center;
   font-family: var(--font-accent);
   font-weight: 400;
-  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  font-size: clamp(1.05rem, 1.7vw, 1.25rem);
   color: var(--color-text);
   /* כניסה מדורגת — הכותרות צפות פנימה כשהסקשן נחשף */
   opacity: 0;
@@ -1034,7 +1034,7 @@ button:focus-visible,
     height: 280px;
   }
   .service-card h3 {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
   }
   .main-nav ul {
     display: none;
