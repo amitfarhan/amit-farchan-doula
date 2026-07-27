@@ -124,14 +124,17 @@ function initReviewsCarousel() {
 
   let dragStartX = 0;
   let dragStartScroll = 0;
+  let dragMoved = false;
   const dragStart = (event) => {
     isDragging = true;
+    dragMoved = false;
     wall.classList.add('is-dragging');
     dragStartX = event.clientX;
     dragStartScroll = wall.scrollLeft;
   };
   const dragMove = (event) => {
     if (!isDragging) return;
+    if (Math.abs(event.clientX - dragStartX) > 5) dragMoved = true;
     wall.scrollLeft = dragStartScroll + (event.clientX - dragStartX);
     wrap();
   };
@@ -144,6 +147,31 @@ function initReviewsCarousel() {
   wall.addEventListener('mousedown', dragStart);
   window.addEventListener('mousemove', dragMove);
   window.addEventListener('mouseup', dragEnd);
+
+  // לחיצה על תמונה (לא בסוף גרירה) פותחת אותה מוגדלת בלייטבוקס
+  const lightbox = document.getElementById('reviews-lightbox');
+  if (lightbox) {
+    const lightboxImg = lightbox.querySelector('.lightbox-img');
+    const closeLightbox = () => {
+      lightbox.hidden = true;
+      lightboxImg.src = '';
+    };
+    track.addEventListener('click', (event) => {
+      if (dragMoved) return;
+      const clicked = event.target.closest('.testimonial-photo');
+      if (!clicked) return;
+      lightboxImg.src = clicked.src;
+      lightboxImg.alt = clicked.alt;
+      lightbox.hidden = false;
+    });
+    lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeLightbox();
+    });
+  }
 
   const speed = 0.5;
   function tick() {

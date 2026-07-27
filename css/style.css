@@ -856,6 +856,38 @@ button:focus-visible,
   box-shadow: var(--shadow-card);
   flex: 0 0 auto;
   -webkit-user-drag: none;
+  cursor: zoom-in;
+}
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 16, 12, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  z-index: 200;
+}
+.lightbox[hidden] {
+  display: none;
+}
+.lightbox-img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+}
+.lightbox-close {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  background: none;
+  border: none;
+  color: var(--color-cream);
+  font-size: 2.4rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: var(--space-1);
 }
 /* ==========================================================================
    באנר CTA — תמונה + טקסט, כמו סקשן הסיום במוקאפ הייחוס
