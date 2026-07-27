@@ -119,10 +119,10 @@
       <div class="reviews-wall reveal">
         <div class="reviews-track">
           {%- for t in home.testimonials.items %}
-          <img class="testimonial-photo" src="{{ t.image }}" alt="{{ t.imageAlt }}" width="{{ t.imageWidth }}" height="{{ t.imageHeight }}" loading="lazy">
+          <img class="testimonial-photo" src="{{ t.image }}" alt="{{ t.imageAlt }}" width="{{ t.imageWidth }}" height="{{ t.imageHeight }}" loading="eager">
           {%- endfor %}
           {%- for t in home.testimonials.items %}
-          <img class="testimonial-photo" src="{{ t.image }}" alt="" aria-hidden="true" width="{{ t.imageWidth }}" height="{{ t.imageHeight }}" loading="lazy">
+          <img class="testimonial-photo" src="{{ t.image }}" alt="" aria-hidden="true" width="{{ t.imageWidth }}" height="{{ t.imageHeight }}" loading="eager">
           {%- endfor %}
         </div>
       </div>

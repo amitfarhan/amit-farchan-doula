@@ -54,8 +54,14 @@ function initReviewsCarousel() {
   let isPaused = false;
   let resumeTimer;
 
-  window.addEventListener('resize', () => {
+  const remeasure = () => {
     halfWidth = track.scrollWidth / 2;
+  };
+  window.addEventListener('resize', remeasure);
+  // התמונות טעונות eager, אבל מוודאים שהמדידה נכונה גם אם התמונות
+  // מסיימות להיטען אחרי שהקרוסלה כבר אותחלה
+  track.querySelectorAll('img').forEach((img) => {
+    if (!img.complete) img.addEventListener('load', remeasure);
   });
 
   const applyOffset = () => {
@@ -95,7 +101,6 @@ function initReviewsCarousel() {
   wall.addEventListener('touchstart', dragStart, { passive: true });
   window.addEventListener('touchmove', dragMove, { passive: true });
   window.addEventListener('touchend', dragEnd);
-  wall.addEventListener('wheel', schedulePause, { passive: true });
 
   const speed = 0.5;
   function tick() {
