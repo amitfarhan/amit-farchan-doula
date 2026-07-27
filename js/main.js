@@ -44,19 +44,29 @@ function initReviewsCarousel() {
   const track = wall ? wall.querySelector('.reviews-track') : null;
   if (!wall || !track) return;
 
+  const items = Array.from(track.children);
+  const setSize = items.length / 2;
+  if (!setSize) return;
+
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let offset = 0;
-  let halfWidth = track.scrollWidth / 2;
   let isDragging = false;
   let dragStartX = 0;
   let dragStartOffset = 0;
   let isPaused = false;
   let resumeTimer;
 
+  // המרחק האמיתי בין תחילת הסט הראשון לתחילת הסט המשוכפל — נמדד ישירות
+  // מהעמודים בפועל (ולא מחושב מרוחב+רווחים), כדי שהלופ יהיה חלק לגמרי
+  // בלי "קפיצה" קטנה כשהוא חוזר להתחלה.
+  let repeatWidth = 1;
   const remeasure = () => {
-    halfWidth = track.scrollWidth / 2;
+    const r0 = items[0].getBoundingClientRect();
+    const r1 = items[setSize].getBoundingClientRect();
+    repeatWidth = Math.abs(r1.left - r0.left) || 1;
   };
+  remeasure();
   window.addEventListener('resize', remeasure);
   // התמונות טעונות eager, אבל מוודאים שהמדידה נכונה גם אם התמונות
   // מסיימות להיטען אחרי שהקרוסלה כבר אותחלה
@@ -65,8 +75,8 @@ function initReviewsCarousel() {
   });
 
   const applyOffset = () => {
-    let x = offset % halfWidth;
-    if (x > 0) x -= halfWidth;
+    let x = offset % repeatWidth;
+    if (x > 0) x -= repeatWidth;
     track.style.transform = `translateX(${x}px)`;
   };
 
