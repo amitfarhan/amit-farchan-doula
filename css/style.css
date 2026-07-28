@@ -34,9 +34,9 @@
   --font-heading: 'Bellefair', 'Times New Roman', serif;
   --font-body: 'Assistant', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-accent: var(--font-heading);
-  /* פונט ייעודי לכותרת ההירו בלבד — סריף שעוצב מלכתחילה לעברית,
-     ולכן האותיות הגדולות בראש העמוד יוצאות מאוזנות יותר */
-  --font-hero: 'Frank Ruhl Libre', 'Bellefair', 'Times New Roman', serif;
+  /* פונט ייעודי לכותרת ההירו בלבד — סאנס עגול ורך, שמרגיש חם ומחבק
+     ומתאים לאופי של הליווי (בשאר האתר הכותרות נשארות בפונט המקורי) */
+  --font-hero: 'Varela Round', 'Assistant', sans-serif;
 
   /* ריווח (סקאלה של 8px) */
   --space-1: 8px;
@@ -378,7 +378,8 @@ button:focus-visible,
 }
 .hero-text .eyebrow {
   font-weight: 600;
-  font-size: 2.4rem;
+  /* הותאם לרוחב האותיות של פונט ההירו כדי שהטאגליין יישאר בשורה אחת */
+  font-size: 2.2rem;
   color: var(--color-olive-deep);
   margin-top: -14px;
 }
@@ -1063,7 +1064,7 @@ button:focus-visible,
   }
   .hero-text .eyebrow {
     max-width: none;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     margin-top: -10px;
   }
   .hero-text .heart-doodle {
