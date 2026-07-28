@@ -10,6 +10,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("print");
 
+  // הדומיין המותאם — חייב להיות מועתק לאתר הבנוי בכל בנייה,
+  // אחרת כל פרסום חדש מוחק את החיבור בגיטהאב והאתר יורד
+  eleventyConfig.addPassthroughCopy("CNAME");
+
   // חותמת זמן לכל בנייה — מצורפת כפרמטר גרסה לקישורי CSS/JS כדי שדפדפנים
   // יביאו תמיד את הגרסה העדכנית ולא יישארו עם קובץ ישן מהקאש אחרי פרסום
   eleventyConfig.addGlobalData("buildTime", () => Date.now());
