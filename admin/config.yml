@@ -4,7 +4,7 @@
 
 backend:
   name: github
-  repo: AvivShriki/amit-farchan-doula
+  repo: amitfarhan/amit-farchan-doula
   branch: master
   automatic_deployments: true
 
