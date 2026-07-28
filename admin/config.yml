@@ -8,7 +8,7 @@ backend:
   branch: master
   automatic_deployments: true
 
-site_url: https://avivshriki.github.io/amit-farchan-doula
+site_url: https://amitfarhandoula.com
 locale: he
 
 media_folder: assets/photos
