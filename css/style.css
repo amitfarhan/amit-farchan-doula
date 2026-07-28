@@ -34,6 +34,9 @@
   --font-heading: 'Bellefair', 'Times New Roman', serif;
   --font-body: 'Assistant', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-accent: var(--font-heading);
+  /* פונט ייעודי לכותרת ההירו בלבד — סריף שעוצב מלכתחילה לעברית,
+     ולכן האותיות הגדולות בראש העמוד יוצאות מאוזנות יותר */
+  --font-hero: 'Frank Ruhl Libre', 'Bellefair', 'Times New Roman', serif;
 
   /* ריווח (סקאלה של 8px) */
   --space-1: 8px;
@@ -371,7 +374,7 @@ button:focus-visible,
 }
 .hero-text .eyebrow,
 .hero-text h1 {
-  font-family: var(--font-heading);
+  font-family: var(--font-hero);
 }
 .hero-text .eyebrow {
   font-weight: 600;
