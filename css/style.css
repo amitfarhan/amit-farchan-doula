@@ -421,13 +421,29 @@ button:focus-visible,
   height: 100%;
   object-fit: cover;
 }
-/* וידאו חי בכל המסכים; בהעדפת צמצום תנועה מוצגת התמונה במקומו
-   (important כדי לגבור גם על כללי המובייל שמופיעים בהמשך הקובץ) */
+/* וידאו חי בכל המסכים. בהעדפת צמצום תנועה הסרטון עדיין מוצג, אבל אינו
+   מתנגן מעצמו — במקום זה מופיע כפתור הפעלה, כך שמי שביקש פחות תנועה
+   מקבל שקט כברירת מחדל אבל עדיין יכול לצפות. */
 .hero-photo { display: none; }
-@media (prefers-reduced-motion: reduce) {
-  .hero-video { display: none !important; }
-  .hero-photo { display: block !important; }
+
+.hero-play {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  transform: translate(50%, -50%); /* RTL: התזוזה האופקית הפוכה */
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(250, 246, 238, 0.9);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  padding: 0;
 }
+.hero-play[hidden] { display: none; }
+.hero-play svg { fill: var(--color-olive-deep); }
 
 /* מבנה ההירו בעמודי השירות — תמונה למעלה, מתחתיה הכפתור הממורכז,
    ורק אז הכותרת והטקסט (לפי בקשת עמית: תמונה ← כפתור ← כותרת) */

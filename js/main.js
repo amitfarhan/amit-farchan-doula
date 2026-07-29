@@ -29,14 +29,32 @@ function initHeroVideo() {
     if (promise && promise.catch) promise.catch(() => {});
   };
 
-  if (video.readyState >= 2) {
+  // מכשיר שביקש צמצום תנועה: הסרטון מוצג אבל ממתין ללחיצה במקום להתנגן לבד
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const playButton = document.querySelector('.hero-play');
+
+  if (reduceMotion) {
+    video.autoplay = false;
+    video.removeAttribute('autoplay');
+    video.pause();
+    if (playButton) {
+      playButton.hidden = false;
+      playButton.addEventListener('click', () => {
+        playButton.hidden = true;
+        tryPlay();
+      });
+    }
+  } else if (video.readyState >= 2) {
     tryPlay();
   } else {
     video.addEventListener('loadeddata', tryPlay, { once: true });
   }
 
   video.addEventListener('click', () => {
-    if (video.paused) tryPlay();
+    if (video.paused) {
+      if (playButton) playButton.hidden = true;
+      tryPlay();
+    }
   });
 }
 

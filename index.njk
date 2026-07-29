@@ -25,6 +25,10 @@
         <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="{{ home.hero.image }}" aria-hidden="true"{% if home.hero.videoSecond %} data-video-second="{{ home.hero.videoSecond }}"{% endif %}>
           <source src="{{ home.hero.video }}" type="video/mp4">
         </video>
+        <!-- מוצג רק כשהמכשיר מבקש צמצום תנועה, ואז הסרטון ממתין ללחיצה -->
+        <button class="hero-play" type="button" aria-label="הפעלת הסרטון" hidden>
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        </button>
         <picture class="hero-photo">
           <!-- במובייל: גרסה עם קיר פנוי רחב בצד ימין, שמפנה מקום לטקסט -->
           <source media="(max-width: 900px)" srcset="{{ home.hero.imageMobile }}">
