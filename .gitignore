@@ -14,3 +14,11 @@ amit photos /
 Gveret_Levin,Playpen_Sans_Hebrew/
 VIDEOS/
 main video/
+
+# צילומי המסך הגולמיים של ההמלצות — מכילים שמות ותמונות של לקוחות אמיתיות.
+# הגרסאות המצונזרות שבשימוש נמצאות ב-assets/photos/ ורק הן נכנסות לריפו הציבורי.
+FIDBEK/
+
+# כלי עבודה מקומיים וקבצי טיוטה — לא חלק מהאתר
+.claude/
+fonts-preview.html
