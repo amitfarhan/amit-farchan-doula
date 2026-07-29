@@ -7,6 +7,7 @@
     "ogImageHeight": 1200
   },
   "title": "הכנה ללידה",
+  "lead": "",
   "formatNote": "מפגש זוגי מותאם בשבילכם.",
   "ctaButtonText": "לתיאום שיחת היכרות",
   "image": "assets/photos/service-birth-prep.jpg",
@@ -15,7 +16,7 @@
   "imageHeight": 1200,
   "intro": {
     "paragraphs": [
-      "לידה היא אחד הרגעים המשמעותיים בחיים.",
+      "לידה היא אחד הרגעים המשמעותיים בחיים שלך.",
       "אבל עבור רוב הנשים היא גם מלאה בסימני שאלה."
     ],
     "questions": [
