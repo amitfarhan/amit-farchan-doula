@@ -14,6 +14,16 @@ function initHeroVideo() {
   const video = document.querySelector('.hero-video');
   if (!video) return;
 
+  // אם הוגדר סרטון פתיח נוסף — בכל טעינת עמוד מגרילים באיזה מהשניים לנגן,
+  // כך שמבקרת חוזרת רואה לסירוגין. ה-HTML מגיע תמיד עם הסרטון הראשון,
+  // כדי שגם בלי JavaScript יוצג סרטון ולא רק תמונה.
+  const second = video.dataset.videoSecond;
+  const source = video.querySelector('source');
+  if (second && source && Math.random() < 0.5) {
+    source.src = second;
+    video.load(); // מאפס את הטעינה כדי שהמקור החדש ייכנס לתוקף
+  }
+
   const tryPlay = () => {
     const promise = video.play();
     if (promise && promise.catch) promise.catch(() => {});

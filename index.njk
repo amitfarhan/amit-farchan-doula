@@ -22,7 +22,7 @@
       </div>
       <div class="hero-media">
         <!-- וידאו חי בדסקטופ; במובייל ובהעדפת צמצום תנועה מוצגת התמונה -->
-        <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="{{ home.hero.image }}" aria-hidden="true">
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="{{ home.hero.image }}" aria-hidden="true"{% if home.hero.videoSecond %} data-video-second="{{ home.hero.videoSecond }}"{% endif %}>
           <source src="{{ home.hero.video }}" type="video/mp4">
         </video>
         <picture class="hero-photo">

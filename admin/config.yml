@@ -61,6 +61,7 @@ collections:
               - { name: imageMobile, label: תמונת הפתיח למובייל, widget: image }
               - { name: imageAlt, label: תיאור התמונה (לנגישות), widget: string }
               - { name: video, label: נתיב סרטון הרקע, widget: string, required: false }
+              - { name: videoSecond, label: "נתיב סרטון רקע נוסף (יוצג לסירוגין באקראי בכל כניסה)", widget: string, required: false }
               - { name: imageWidth, label: רוחב התמונה בפיקסלים, widget: number }
               - { name: imageHeight, label: גובה התמונה בפיקסלים, widget: number }
           - name: services
