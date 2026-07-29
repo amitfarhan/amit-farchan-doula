@@ -1,5 +1,6 @@
 # תצורת פאנל הניהול של עמית — Sveltia CMS
-# ההתחברות דרך GitHub תופעל בשלב חיבור האחסון (Netlify).
+# ההתחברות נעשית מול GitHub דרך שירות אימות משלנו שרץ ב-Cloudflare Workers,
+# כי GitHub Pages לא מספקת שירות כזה. הקוד שלו: sveltia/sveltia-cms-auth
 # לבדיקה מקומית: Sveltia יודעת לעבוד ישירות מול התיקייה המקומית בכרום.
 
 backend:
@@ -7,6 +8,7 @@ backend:
   repo: amitfarhan/amit-farchan-doula
   branch: master
   automatic_deployments: true
+  base_url: https://sveltia-cms-auth.amit-malul0108.workers.dev
 
 site_url: https://amitfarhandoula.com
 locale: he
