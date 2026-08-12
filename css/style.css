@@ -36,6 +36,8 @@
   --font-accent: var(--font-heading);
   /* פונט ייעודי לכותרת ההירו בלבד — סאנס עגול ורך, שמרגיש חם ומחבק
      ומתאים לאופי של הליווי (בשאר האתר הכותרות נשארות בפונט המקורי) */
+  /* כותרת ההירו בפונט תצוגה נפרד מהטאגליין שמתחתיה */
+  --font-hero-title: 'Secular One', 'Assistant', sans-serif;
   --font-hero: 'Varela Round', 'Assistant', sans-serif;
 
   /* ריווח (סקאלה של 8px) */
@@ -372,9 +374,11 @@ button:focus-visible,
 .hero-text {
   text-align: center;
 }
-.hero-text .eyebrow,
-.hero-text h1 {
+.hero-text .eyebrow {
   font-family: var(--font-hero);
+}
+.hero-text h1 {
+  font-family: var(--font-hero-title);
 }
 .hero-text .eyebrow {
   font-weight: 600;
