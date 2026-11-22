@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "title": "הכנה להנקה | סדנה מקוונת עם עמית פרחן",
+    "description": "מגיעים ללידה עם ידע, ביטחון ושקט, כדי להתחיל את ההנקה בצורה הטובה ביותר. סדנה בזום ב-14/12 בשעה 20:00.",
+    "ogImage": "assets/photos/amit-portrait.jpg",
+    "ogImageWidth": 1065,
+    "ogImageHeight": 1600
+  },
+  "kicker": "סדנה מקוונת",
+  "titleLight": "הכנה",
+  "titleBold": "להנקה",
+  "message": "מגיעים ללידה עם ידע, ביטחון ושקט, כדי להתחיל את ההנקה בצורה הטובה ביותר.",
+  "details": [
+    {
+      "label": "תאריך",
+      "value": "14/12"
+    },
+    {
+      "label": "שעה",
+      "value": "20:00"
+    },
+    {
+      "label": "מיקום",
+      "value": "בזום"
+    }
+  ],
+  "audience": "מתאים לנשים לקראת לידה שרוצות להניק, או שלא הצליחו בפעם הקודמת ועכשיו רוצות חוויה מתקנת.",
+  "recommendationText": "אידיאלי בין השבועות",
+  "recommendationRange": "32–36",
+  "hostName": "עמית פרחן",
+  "hostRole": "דולה ומדריכת הנקה",
+  "photo": "assets/photos/amit-portrait.jpg",
+  "photoAlt": "עמית פרחן, דולה ומדריכת הנקה"
+}
