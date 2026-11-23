@@ -81,10 +81,10 @@
   var root = document.documentElement;
   // מצב סטילס לייצוא תמונה — ?still=1 מבטל תנועה בלי לשנות את המראה הסופי
   if (location.search.indexOf('still') > -1) root.setAttribute('data-still', '');
-  /* רשת ביטחון: רצף האנימציות נגמר אחרי 2.1 שניות. אם מסיבה כלשהי הוא לא
+  /* רשת ביטחון: רצף האנימציות נגמר אחרי 3 שניות. אם מסיבה כלשהי הוא לא
      רץ בכלל — דפדפן מוטמע, מכשיר שחוסם אנימציות — הטקסט היה נשאר בלתי
-     נראה. אחרי 2.8 שניות נכפה המצב הסופי. כשהאנימציה כן רצה זה חסר השפעה. */
-  setTimeout(function(){ root.setAttribute('data-revealed',''); }, 2800);
+     נראה. אחרי 3.6 שניות נכפה המצב הסופי. כשהאנימציה כן רצה זה חסר השפעה. */
+  setTimeout(function(){ root.setAttribute('data-revealed',''); }, 3600);
 </script>
 </body>
 </html>
