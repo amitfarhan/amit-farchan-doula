@@ -1,0 +1,91 @@
+---js
+{
+  permalink: "flyer-hanaka-story.html",
+  eleventyComputed: { meta: (data) => data.flyer_hanaka.meta }
+}
+---
+{%- set f = flyer_hanaka -%}
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ meta.title }}</title>
+<meta name="description" content="{{ meta.description }}">
+<meta name="robots" content="noindex">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:title" content="{{ meta.title }}">
+<meta property="og:description" content="{{ meta.description }}">
+<meta property="og:image" content="{{ site.url }}/{{ meta.ogImage }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@200;300;400;500;700;800;900&family=Assistant:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/flyer.css?v={{ buildTime }}">
+<link rel="stylesheet" href="css/flyer-story.css?v={{ buildTime }}">
+<script>
+  /* מצבי ההתחלה של האנימציה חלים רק כשיש JS — בלעדיו הפלאייר מוצג מוגמר */
+  document.documentElement.className += ' js';
+</script>
+</head>
+<body class="story">
+<main class="stage">
+  <article class="flyer" aria-label="{{ meta.title }}">
+
+    {# --- שכבות רקע: צורות אורגניות שנותנות עומק בלי להתחרות בתוכן --- #}
+    <div class="layers" aria-hidden="true">
+      <span class="shape shape-sage"></span>
+      <span class="shape shape-clay"></span>
+    </div>
+
+    {# --- הדיוקן בפריסה מלאה: הוא ראש הפלאייר עצמו, לא אובייקט שמונח עליו.
+           הכותרת עולה אל תוך ההמסה שבתחתיתו ויוצרת את השכבה. --- #}
+    <div class="portrait">
+      <img src="{{ f.photo }}" alt="{{ f.photoAlt }}" width="1065" height="1600">
+      <header class="head">
+        <img class="brand" src="{{ site.logo }}" alt="{{ site.name }}">
+        <span class="kicker reveal d0">{{ f.kicker }}</span>
+      </header>
+    </div>
+
+    <div class="sheet">
+    <h1 class="title">
+      <span class="line"><span class="line-in t-light">{{ f.titleLight }}</span></span>
+      <span class="line"><span class="line-in t-bold">{{ f.titleBold }}</span></span>
+    </h1>
+
+    <p class="message reveal d3">{{ f.message }}</p>
+
+    <div class="details reveal d4">
+      {%- for d in f.details %}
+      <div class="detail">
+        <span class="detail-value">{{ d.value }}</span>
+        <span class="detail-label">{{ d.label }}</span>
+      </div>
+      {%- endfor %}
+      <span class="details-sweep" aria-hidden="true"></span>
+    </div>
+
+    <p class="audience reveal d5">{{ f.audience }}</p>
+
+    <p class="recommend reveal d6">{{ f.recommendationText }} <span class="range" dir="ltr">{{ f.recommendationRange }}</span></p>
+
+    <footer class="host reveal d7">
+      <span class="host-name">{{ f.hostName }}</span>
+      <span class="host-role">{{ f.hostRole }}</span>
+    </footer>
+    </div>
+
+  </article>
+</main>
+<script>
+  var root = document.documentElement;
+  // מצב סטילס לייצוא תמונה — ?still=1 מבטל תנועה בלי לשנות את המראה הסופי
+  if (location.search.indexOf('still') > -1) root.setAttribute('data-still', '');
+  /* רשת ביטחון: רצף האנימציות נגמר אחרי 2.1 שניות. אם מסיבה כלשהי הוא לא
+     רץ בכלל — דפדפן מוטמע, מכשיר שחוסם אנימציות — הטקסט היה נשאר בלתי
+     נראה. אחרי 2.8 שניות נכפה המצב הסופי. כשהאנימציה כן רצה זה חסר השפעה. */
+  setTimeout(function(){ root.setAttribute('data-revealed',''); }, 2800);
+</script>
+</body>
+</html>
