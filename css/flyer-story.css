@@ -15,7 +15,7 @@ body.story .flyer{
 
 /* התמונה בולעת את כל המקום שנשאר אחרי הטקסט */
 body.story .portrait{flex:1 1 auto;min-height:0;height:auto}
-body.story .portrait > img{object-position:50% 17%}
+body.story .portrait > img{object-position:50% 25%}
 
 /* שם המשתמש של אינסטגרם יושב בראש המסך — הלוגו יורד מתחתיו */
 body.story .head{padding-top:max(96px,11cqw)}
@@ -54,9 +54,10 @@ body.story .recommend{margin-top:max(12px,2cqw)}
 body.story .host{margin-top:max(16px,2.5cqw)}
 body.story .sheet{padding-bottom:max(26px,3.6cqw)}
 
-/* כפתור הקריאה לפעולה של המודעה חוסם את תחתית המסך —
-   שומרים את השוליים האלה ריקים כדי שפרטי המנחה לא ייחתכו */
-body.story .host{margin-bottom:max(130px,15cqw)}
+/* כפתור הקריאה לפעולה של המודעה יושב בנכס בערך בין 1450 ל-1570 (נמדד
+   מצילום של המודעה החיה), ומתחתיו פס ה"Ad". לכן כל התוכן נדחף אל מעל
+   הגבול הזה, עם מרווח ביטחון לגדלי כפתור ושפות אחרות. */
+body.story .host{margin-bottom:max(400px,44cqw)}
 
 /* ---------- תנועה לאורך 30 שניות ---------- */
 @media (prefers-reduced-motion: no-preference){
@@ -82,3 +83,8 @@ body.story .host{margin-bottom:max(130px,15cqw)}
 
 @keyframes kenburns{from{transform:scale(1.085)}to{transform:scale(1)}}
 @keyframes pulse{0%,100%{opacity:0}18%{opacity:1}42%{opacity:0}}
+
+/* כתמי הרקע יורדים אל החצי התחתון: שם יושב כפתור המודעה, והאזור
+   היה נשאר שנהב שטוח לגמרי */
+body.story .shape-sage{width:62cqw;height:62cqw;top:58cqw;inset-inline-start:-20cqw}
+body.story .shape-clay{width:52cqw;height:52cqw;bottom:-6cqw;inset-inline-end:-18cqw;inset-inline-start:auto}
